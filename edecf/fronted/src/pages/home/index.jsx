@@ -8,6 +8,8 @@ import { MdEmail } from "react-icons/md";
 import model from "./../../assets/images/model.jpg";
 import about from "./../../assets/images/about.jpg";
 import person from "./../../assets/images/person_2.jpg";
+
+import { GoHeart,GoHeartFill,FaStar   } from "react-icons/go";
 function HomePage() {
   return (
     <>
@@ -111,12 +113,12 @@ function HomePage() {
 
                       <div className="likeStars">
                         <div className="star">
-                          <span>icon</span>
+                          <span><GoHeart /></span>
                           <span>5.0</span>
                         </div>
 
                         <div className="like">
-                          <span>icon</span>
+                          <span><FaStar /></span>
                           <span>29</span>
                         </div>
                       </div>
