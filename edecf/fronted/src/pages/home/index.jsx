@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./../../assets/style/Home.scss";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -9,8 +11,28 @@ import model from "./../../assets/images/model.jpg";
 import about from "./../../assets/images/about.jpg";
 import person from "./../../assets/images/person_2.jpg";
 
-import { GoHeart,GoHeartFill,FaStar   } from "react-icons/go";
+import { GoHeart, GoHeartFill } from "react-icons/go";
+import { FaStar } from "react-icons/fa";
+
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllProducts,
+  handleWishlist,
+  handleBasket,
+} from "../../redux/slices/ProductSlice";
+
 function HomePage() {
+  const dispatch = useDispatch();
+
+  const wishlist = useSelector((state) => state.product.wishlist);
+  const basket = useSelector((state) => state.product.basket);
+  console.log("homedaki basket", basket);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
+
+  const data = useSelector((state) => state.product.data);
+  // console.log("dataa", data);
   return (
     <>
       <section className="contactHeader">
@@ -61,7 +83,7 @@ function HomePage() {
             <ul className="pages">
               <li>Home</li>
               <li>Add</li>
-              <li>Basket</li>
+              <li><Link to="/basket">Basket</Link></li>
               <li>Wishlist</li>
               <li>Detail</li>
             </ul>
@@ -94,6 +116,7 @@ function HomePage() {
               Voluptatum sint dolores quod sunt maxime. Tenetur veniam et est
               eveniet minus?
             </p>
+            <Link to="/basket">Basket</Link>
           </div>
 
           <div className="products">
@@ -103,133 +126,61 @@ function HomePage() {
                 spacing={{ xs: 2, md: 3 }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
               >
-                <Grid item xs={2} sm={4} md={4}>
-                  <div className="card">
-                    <div className="imgWrapper">
-                      <img src={model} alt="" />
-                    </div>
-                    <div className="details">
-                      <span className="name">Product Name</span>
+                {data &&
+                  data.map((prod) => {
+                    return (
+                      <Grid item xs={2} sm={4} md={4} key={prod._id}>
+                        <div className="card">
+                          <div className="imgWrapper">
+                            <img src={model} alt="" />
+                          </div>
+                          <div className="details">
+                            <span className="name">{prod.name}</span>
 
-                      <div className="likeStars">
-                        <div className="star">
-                          <span><GoHeart /></span>
-                          <span>5.0</span>
+                            <div className="likeStars">
+                              <div className="star">
+                                <button
+                                  onClick={() => {
+                                    dispatch(handleWishlist(prod));
+                                  }}
+                                >
+                                  {wishlist.find(
+                                    (wish) => wish._id == prod._id
+                                  ) ? (
+                                    <GoHeartFill className="icon" />
+                                  ) : (
+                                    <GoHeart className="icon" />
+                                  )}
+                                </button>
+                                <span>5.0</span>
+                              </div>
+
+                              <div className="like">
+                                <button>
+                                  <FaStar className="icon" />
+                                </button>
+                                <span>29</span>
+                              </div>
+                            </div>
+
+                            <p>{prod.description}</p>
+
+                            <div className="buttons">
+                              <button
+                                onClick={() => {
+                                  dispatch(handleBasket(prod)),
+                                    console.log("basket ind", basket);
+                                }}
+                              >
+                                CART
+                              </button>
+                              <button>VIEW</button>
+                            </div>
+                          </div>
                         </div>
-
-                        <div className="like">
-                          <span><FaStar /></span>
-                          <span>29</span>
-                        </div>
-                      </div>
-
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-
-                      <div className="buttons">
-                        <button>CART</button>
-                        <button>VIEW</button>
-                      </div>
-                    </div>
-                  </div>
-                </Grid>
-
-                <Grid item xs={2} sm={4} md={4}>
-                  <div className="card">
-                    <div className="imgWrapper">
-                      <img src={model} alt="" />
-                    </div>
-                    <div className="details">
-                      <span className="name">Product Name</span>
-
-                      <div className="likeStars">
-                        <div className="star">
-                          <span>icon</span>
-                          <span>5.0</span>
-                        </div>
-
-                        <div className="like">
-                          <span>icon</span>
-                          <span>29</span>
-                        </div>
-                      </div>
-
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-
-                      <div className="buttons">
-                        <button>CART</button>
-                        <button>VIEW</button>
-                      </div>
-                    </div>
-                  </div>
-                </Grid>
-
-                <Grid item xs={2} sm={4} md={4}>
-                  <div className="card">
-                    <div className="imgWrapper">
-                      <img src={model} alt="" />
-                    </div>
-                    <div className="details">
-                      <span className="name">Product Name</span>
-
-                      <div className="likeStars">
-                        <div className="star">
-                          <span>icon</span>
-                          <span>5.0</span>
-                        </div>
-
-                        <div className="like">
-                          <span>icon</span>
-                          <span>29</span>
-                        </div>
-                      </div>
-
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-
-                      <div className="buttons">
-                        <button>CART</button>
-                        <button>VIEW</button>
-                      </div>
-                    </div>
-                  </div>
-                </Grid>
-
-                <Grid item xs={2} sm={4} md={4}>
-                  <div className="card">
-                    <div className="imgWrapper">
-                      <img src={model} alt="" />
-                    </div>
-                    <div className="details">
-                      <span className="name">Product Name</span>
-
-                      <div className="likeStars">
-                        <div className="star">
-                          <span>icon</span>
-                          <span>5.0</span>
-                        </div>
-
-                        <div className="like">
-                          <span>icon</span>
-                          <span>29</span>
-                        </div>
-                      </div>
-
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </p>
-
-                      <div className="buttons">
-                        <button>CART</button>
-                        <button>VIEW</button>
-                      </div>
-                    </div>
-                  </div>
-                </Grid>
+                      </Grid>
+                    );
+                  })}
               </Grid>
             </Box>
           </div>

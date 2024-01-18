@@ -1,11 +1,14 @@
 import "./App.css";
 import HomePage from "./pages/home";
+import { routes } from "./routes";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
+  const router = createBrowserRouter(routes);
   return (
     <>
-      <HomePage />
-      <h1>hcjsdc</h1>
+      <RouterProvider router={router} />
     </>
   );
 }

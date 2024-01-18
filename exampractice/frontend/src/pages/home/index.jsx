@@ -18,7 +18,11 @@ import {
 function Home() {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.food.data);
+  const wishlist = useSelector((state) => state.food.wishlist);
+  const basket = useSelector((state) => state.food.basket);
 
+  console.log("maWishlist", wishlist);
+  console.log("maBasket", basket);
   useEffect(() => {
     dispatch(getAllFood());
   }, []);
@@ -55,8 +59,8 @@ function Home() {
                           <h1>{food.price}$</h1>
                           <button
                             onClick={() => {
-                              handleBasket(food);
-                              console.log("added basket")
+                              dispatch(handleBasket(food));
+                              console.log("added basket");
                             }}
                           >
                             bas
@@ -64,7 +68,7 @@ function Home() {
                           <button
                             onClick={() => {
                               dispatch(handleWishlist(food._id));
-                              console.log(" added wishlist");
+                              console.log("added wishlist");
                             }}
                           >
                             wish

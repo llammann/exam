@@ -8,27 +8,12 @@ export const getAllFood = createAsyncThunk(
   }
 );
 
-let wishlist;
-if (localStorage.getItem("wishlist")) {
-  wishlist = JSON.parse(localStorage.getItem("wishlist"));
-} else {
-  localStorage.setItem("wishlist", JSON.stringify([]));
-}
-
-// basket
-let basket;
-if (localStorage.getItem("basket")) {
-  wishlist = JSON.parse(localStorage.getItem("basket"));
-} else {
-  localStorage.setItem("basket", JSON.stringify([]));
-}
-
 const initialState = {
   value: 0,
   data: [],
   error: null,
-  wishlist: wishlist,
-  basket: basket,
+  wishlist: [],
+  basket: [],
 };
 
 export const FoodSlice = createSlice({
@@ -37,27 +22,28 @@ export const FoodSlice = createSlice({
   reducers: {
     handleWishlist: (state, action) => {
       // console.log("wishlist", current(state.wishlist));
-      let find = state.wishlist.find((wish) => wish === action.payload);
-      if (find !== undefined) {
+      let find = state.wishlist?.find((wish) => wish === action.payload);
+      if (find) {
         state.wishlist = state.wishlist.filter(
           (wish) => wish !== action.payload
         );
       } else {
-        state.wishlist.push(action.payload);
+        state.wishlist?.push(action.payload);
       }
-      localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
     },
 
     handleBasket: (state, action) => {
       console.log("action.payload basket :", action.payload);
-      const find = state.basket.find((elem) => elem._id == action.payload._id);
-      if (find !== undefined) {
+      const find = state.basket?.find((elem) => elem._id == action.payload._id);
+      console.log("fjisref", state.basket);
+      if (find) {
         find.count += 1;
       } else {
-        state.basket.push({ ...action.payload, count: 1 });
+        state.basket?.push({ ...action.payload, count: 1 });
       }
-      localStorage.setItem("basket", JSON.stringify(state.basket));
+      console.log("state basket", state.basket);
     },
+    
   },
 
   extraReducers: (builder) => {

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 require("./src/config/db")
-require('dotenv').config()
+require('dotenv').config("")
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const port = 3000 || process.env.PORT
