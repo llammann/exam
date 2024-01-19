@@ -1,10 +1,32 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Link, Navigate } from "react-router-dom";
 
 export const getAllProducts = createAsyncThunk(
-  "food/gettAllProducts",
+  "product/gettAllProducts",
   async () => {
     const response = await axios.get("http://localhost:3000/products");
+    return response.data;
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  "product/deleteProduct",
+  async (productId) => {
+    const response = await axios.delete(
+      `http://localhost:3000/products/${productId}`
+    );
+    return response.data;
+  }
+);
+
+export const postProduct = createAsyncThunk(
+  "product/postProduct",
+  async (newProduct) => {
+    const response = await axios.post(
+      "http://localhost:3000/products",
+      newProduct
+    );
     return response.data;
   }
 );
@@ -31,6 +53,11 @@ export const foodSlice = createSlice({
       }
       console.log("wishlistSTATE", state.wishlist);
     },
+    deleteWish: (state, action) => {
+      state.wishlist = state.wishlist.filter(
+        (bas) => bas._id !== action.payload._id
+      );
+    },
 
     handleBasket: (state, action) => {
       let find = current(state.basket).find(
@@ -38,9 +65,7 @@ export const foodSlice = createSlice({
       );
 
       if (!find) {
-        const newProd = { ...action.payload, count: 1 };
-        state.basket = [...state.basket, newProd];
-        console.log("basket find", find);
+        state.basket = [...state.basket, { ...action.payload, count: 1 }];
       } else {
         state.basket = state.basket.map((elem) => {
           if (elem._id == action.payload._id) {
@@ -51,24 +76,17 @@ export const foodSlice = createSlice({
       }
     },
     handleMinus: (state, action) => {
-      state.basket = [
-        ...state.basket.map((elem) => {
-          if (elem._id == action.payload?._id) {
-            elem.count -= 1;
-            return elem;
-          }
-          return elem;
-        }),
-      ];
+      let find = state.basket.find((elem) => elem._id == action.payload._id);
+      if (find.count > 1) {
+        find.count--;
+      } else {
+        state.basket = state.basket.filter((elem) => elem._id !== find._id);
+      }
     },
 
     handlePlus: (state, action) => {
-      state.basket = state.basket.map((elem) => {
-        if (elem._id == action.payload?._id) {
-          return { ...elem, count: (elem.count += 1) };
-        }
-        return elem;
-      });
+      let find = state.basket.find((elem) => elem._id == action.payload._id);
+      find.count++;
     },
 
     handleDelete: (state, action) => {
@@ -77,10 +95,21 @@ export const foodSlice = createSlice({
       );
     },
   },
-
   extraReducers: (builder) => {
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.data = action.payload;
+      // console.log("state", state.data);
+    });
+
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      state.data = state.data.filter((elem) => elem._id != action.payload);
+      console.log("deleted data", state.data);
+      // console.log("state", state.data);
+    });
+
+    builder.addCase(postProduct.fulfilled, (state, action) => {
+      state.data = state.data.push(action.payload);
+      console.log("posted data", state.data);
       // console.log("state", state.data);
     });
   },
@@ -93,6 +122,7 @@ export const {
   handlePlus,
   handleMinus,
   handleDelete,
+  deleteWish,
 } = foodSlice.actions;
 
 export default foodSlice.reducer;

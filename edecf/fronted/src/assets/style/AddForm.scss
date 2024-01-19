@@ -1,0 +1,30 @@
+.form {
+    width: 1005;
+    background-color: rgb(198, 198, 198);
+
+    .container {
+        width: 1200px;
+        margin: auto;
+        text-align: center;
+
+        h1 {
+            font-size: 30px;
+            padding-bottom: 50px;
+        }
+
+        form {
+            margin: auto;
+            padding: 40px 25px;
+            width: 40%;
+            background-color: rgb(215, 203, 237);
+
+            .input {
+                margin-bottom: 25px;
+                width: 100%;
+                padding: 10px;
+                border-radius: 6px;
+                border: 2px solid purple;
+            }
+        }
+    }
+}

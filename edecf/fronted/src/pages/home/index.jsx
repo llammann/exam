@@ -5,8 +5,7 @@ import "./../../assets/style/Home.scss";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+
 import model from "./../../assets/images/model.jpg";
 import about from "./../../assets/images/about.jpg";
 import person from "./../../assets/images/person_2.jpg";
@@ -20,6 +19,8 @@ import {
   handleWishlist,
   handleBasket,
 } from "../../redux/slices/ProductSlice";
+
+import { Helmet } from "react-helmet";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -35,61 +36,11 @@ function HomePage() {
   // console.log("dataa", data);
   return (
     <>
-      <section className="contactHeader">
-        <div className="container">
-          <div className="left">
-            <span className="faceBook">
-              <FaFacebook style={{ color: "white" }} />
-            </span>
-            <span className="twitter">
-              <FaTwitter style={{ color: "white" }} />
-            </span>
-            <span className="instagram">
-              <FaInstagram style={{ color: "white", fontsize: "2px" }} />
-            </span>
-            <span className="linkedn">
-              <FaLinkedin style={{ color: "white" }} />
-            </span>
-          </div>
-
-          <div className="right">
-            <span className="phoneNumber">
-              <span className="phone">
-                <FaPhone style={{ color: "orange" }} />
-              </span>
-              <span className="phoneNumber">(+1) 234 5678 9101</span>
-            </span>
-
-            <span className="emailContact">
-              <span className="emailIcon">
-                <MdEmail style={{ color: "orange" }} />
-              </span>
-              <span className="email">shop@yourdomain.comspan</span>
-            </span>
-          </div>
-        </div>
-      </section>
-
-      <nav>
-        <div className="container">
-          <div className="left">
-            <span className="logo">
-              <span>Selling</span>
-              <span>.</span>
-            </span>
-          </div>
-
-          <div className="right">
-            <ul className="pages">
-              <li>Home</li>
-              <li>Add</li>
-              <li><Link to="/basket">Basket</Link></li>
-              <li>Wishlist</li>
-              <li>Detail</li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
 
       <section className="ShopWithUs">
         <div className="container">
@@ -116,7 +67,6 @@ function HomePage() {
               Voluptatum sint dolores quod sunt maxime. Tenetur veniam et est
               eveniet minus?
             </p>
-            <Link to="/basket">Basket</Link>
           </div>
 
           <div className="products">
@@ -174,7 +124,18 @@ function HomePage() {
                               >
                                 CART
                               </button>
-                              <button>VIEW</button>
+                              <Link to={"/" + prod._id}>
+                                <button
+                                  onClick={() => {
+                                    // dispatch(handleView(prod._id));
+                                    console.log("detail");
+                                    // navigate("/" + prod._id);
+                                    // <Link to={"/" + prod._id} />;
+                                  }}
+                                >
+                                  VIEW
+                                </button>
+                              </Link>
                             </div>
                           </div>
                         </div>

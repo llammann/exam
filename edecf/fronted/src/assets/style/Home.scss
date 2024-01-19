@@ -3,91 +3,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-.contactHeader {
-  width: 100%;
-  background-color: #f8f9fa;
-  padding: 10px;
-  .container {
-    width: 1200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: auto;
-    .left {
-      span {
-        padding: 6px;
-        margin-right: 2px;
-        background-color: black;
-        border-radius: 50%;
-      }
-    }
-    .right {
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      .phoneNumber {
-        margin-right: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        .phoneNumber {
-          margin-left: 6px;
-        }
-      }
-
-      .emailContact {
-        margin-right: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        .email {
-          margin-left: 6px;
-        }
-      }
-    }
-  }
-}
-
-nav {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  .container {
-    margin: auto;
-    width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .left {
-      .logo {
-        :first-child {
-          font-size: 30px;
-          font-weight: 900;
-        }
-        :last-child {
-          color: orange;
-          font-size: 50px;
-        }
-      }
-    }
-
-    .right {
-      width: 100%;
-      .pages {
-        list-style: none;
-        display: flex;
-        justify-content: end;
-        align-items: center;
-
-        li {
-          padding-left: 40px;
-        }
-      }
-    }
-  }
-}
 
 .ShopWithUs {
   padding: 300px 0 300px 0;
@@ -96,6 +11,7 @@ nav {
   background-image: url("./../images//hero_2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+
   .container {
     width: 1200px;
     margin: auto;
@@ -103,25 +19,30 @@ nav {
     flex-direction: column;
     align-items: start;
     justify-content: start;
+
     h1 {
       font-size: 50px;
       padding-bottom: 10px;
       font-weight: 900;
     }
+
     p {
       font-size: 25px;
       padding-bottom: 30px;
     }
+
     .buttons {
       button {
         padding: 15px 45px;
         border: white 2px solid;
       }
+
       :first-child {
         background-color: black;
         color: white;
         margin-right: 3px;
       }
+
       :last-child {
         color: black;
         background-color: white;
@@ -133,22 +54,26 @@ nav {
 .ourProducts {
   width: 100%;
   padding: 80px 0;
+
   .container {
     width: 1200px;
     margin: auto;
     text-align: center;
+
     .header {
       margin-bottom: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
       h1 {
         font-weight: 900;
         font-size: 40px;
         padding-top: 10px;
         padding-bottom: 17px;
       }
+
       p {
         width: 30%;
       }
@@ -156,29 +81,35 @@ nav {
 
     .products {
       width: 100%;
+
       .card {
         width: 100%;
         margin-bottom: 30px;
+
         .imgWrapper {
           width: 100%;
           overflow: hidden;
           margin-bottom: 20px;
+
           img {
             width: 100%;
             object-fit: cover !important;
           }
         }
+
         .details {
           .name {
             font-size: 25px;
             padding-bottom: 10px;
           }
+
           .likeStars {
             margin-bottom: 15px;
             margin-top: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
+
             .star {
               padding-right: 25px;
             }
@@ -188,6 +119,7 @@ nav {
               button {
                 background-color: transparent;
                 border: none;
+
                 .icon {
                   font-size: 20px;
                   color: red;
@@ -201,22 +133,26 @@ nav {
               }
             }
           }
+
           p {
             width: 70%;
             margin: auto;
             margin-bottom: 15px;
           }
+
           .buttons {
             button {
               padding: 5px 15px;
               font-size: 8px;
               cursor: pointer;
             }
+
             :first-child {
               background-color: black;
               color: white;
               margin-right: 10px;
             }
+
             :nth-child(2) {
               background-color: white;
               color: black;
@@ -252,12 +188,14 @@ nav {
     .inputButton {
       width: 60%;
       margin-bottom: 20px;
+
       input {
         width: 75%;
         padding: 10px 0 10px 10px;
         background-color: transparent;
         border: 2px solid white;
       }
+
       button {
         padding: 10px 10px 10px 10px;
         height: 100%;
@@ -267,6 +205,7 @@ nav {
         font-size: 13px;
       }
     }
+
     p {
       width: 50%;
     }
@@ -276,20 +215,25 @@ nav {
 .featuredProducts {
   padding: 100px 0;
   background-color: #f8f9fa;
+
   .container {
     width: 1200px;
     margin: auto;
+
     .header {
       text-align: center;
+
       span {
         margin-bottom: 15px;
         display: block;
       }
+
       h1 {
         font-size: 40px;
         font-weight: 900;
         margin-bottom: 20px;
       }
+
       p {
         width: 40%;
         margin: auto;
@@ -305,9 +249,11 @@ nav {
       width: 100%;
       background-color: white;
       padding: 40px;
+
       .imgWrapper {
         width: 50%;
         height: 100%;
+
         img {
           width: 100%;
           object-fit: cover;
@@ -318,32 +264,40 @@ nav {
       .right {
         width: 50%;
         padding-left: 90px;
+
         h1 {
           font-size: 50px;
           padding-bottom: 25px;
         }
+
         p {
           font-size: 20px;
           padding-bottom: 20px;
         }
+
         span {
           font-size: 35px;
           padding-bottom: 20px;
         }
+
         p {
           del {
             font-size: 25px;
           }
+
           span {
             font-size: 25px;
           }
         }
+
         .buttons {
           padding-top: 30px;
           font-size: 25px;
+
           button {
             padding: 10px 25px;
           }
+
           :first-child {
             background-color: white;
             color: black;
@@ -367,9 +321,11 @@ nav {
       width: 100%;
       background-color: white;
       padding: 40px;
+
       .imgWrapper {
         width: 50%;
         height: 100%;
+
         img {
           width: 100%;
           object-fit: cover;
@@ -380,32 +336,40 @@ nav {
       .right {
         width: 50%;
         padding-left: 90px;
+
         h1 {
           font-size: 50px;
           padding-bottom: 25px;
         }
+
         p {
           font-size: 20px;
           padding-bottom: 20px;
         }
+
         span {
           font-size: 35px;
           padding-bottom: 20px;
         }
+
         p {
           del {
             font-size: 25px;
           }
+
           span {
             font-size: 25px;
           }
         }
+
         .buttons {
           padding-top: 30px;
           font-size: 25px;
+
           button {
             padding: 10px 25px;
           }
+
           :first-child {
             background-color: white;
             color: black;
@@ -425,9 +389,11 @@ nav {
 .aboutUs {
   padding: 100px 0;
   background-color: #ffffff;
+
   .container {
     width: 1200px;
     margin: auto;
+
     .about {
       width: 100%;
       display: flex;
@@ -435,8 +401,10 @@ nav {
       justify-content: space-between;
       position: relative;
       margin-bottom: 140px;
+
       .imgWrapper {
         width: 70%;
+
         img {
           width: 100%;
           object-fit: cover;
@@ -446,10 +414,12 @@ nav {
       .right {
         padding-left: 80px;
         width: 30%;
+
         span {
           margin-bottom: 15px;
           display: block;
         }
+
         h1 {
           font-size: 40px;
           padding-bottom: 20px;
@@ -470,6 +440,7 @@ nav {
         padding: 30px 10px;
         bottom: 0px;
         left: 50%;
+
         h1 {
           font-size: 50px;
         }
@@ -478,6 +449,7 @@ nav {
 
     .leaderShip {
       text-align: center;
+
       .head {
         padding-top: 20px;
         font-size: 50px;
@@ -491,6 +463,7 @@ nav {
           width: 80%;
           padding-bottom: 10px;
           margin: auto;
+
           img {
             width: 100%;
             object-fit: cover;
@@ -502,6 +475,7 @@ nav {
             padding-bottom: 10px;
             display: block;
           }
+
           p {
             padding-bottom: 15px;
           }
@@ -512,6 +486,7 @@ nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             span {
               background-color: rgb(107, 107, 107);
               padding: 6px;

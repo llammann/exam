@@ -4,16 +4,17 @@ import model from "./../../assets/images/model.jpg";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { FaStar } from "react-icons/fa";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
-    handleWishlist,
-    handleMinus,
-    handlePlus,
-    handleDelete
-  } from "../../redux/slices/ProductSlice";
+  handleWishlist,
+  handleMinus,
+  handlePlus,
+  handleDelete,
+} from "../../redux/slices/ProductSlice";
 function Basket() {
   const dispatch = useDispatch();
 
@@ -21,11 +22,21 @@ function Basket() {
   const wishlist = useSelector((state) => state.product.wishlist);
   console.log("basketdeki data", data);
 
+  let total=0;
+  data.forEach((bas) => {
+    total += +bas.price * bas.count;
+    console.log("bas",bas.price * bas.count)
+  });
+  console.log("totall", total);
+
   return (
     <>
-      <section className="header">
-        <h1>Basket</h1>
+      <section className="headerr">
+        <div className="container">
+          <h1>Basket</h1>
+        </div>
       </section>
+
       <section className="basket">
         <div className="container">
           <Box sx={{ flexGrow: 1 }}>
@@ -44,7 +55,10 @@ function Basket() {
                         </div>
                         <div className="details">
                           <span className="name">{prod.name}</span>
-
+                          <div className="prices">
+                            <span className="price">Price: {prod.price}$</span>
+                            <p>Total: {prod.price * prod.count}$</p>
+                          </div>
                           <div className="likeStars">
                             <div className="star">
                               <button
@@ -60,10 +74,16 @@ function Basket() {
                                   <GoHeart className="icon" />
                                 )}
                               </button>
-                             
                             </div>
 
-                            <div className="like">
+                            <div
+                              className="like"
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
                               <button>
                                 <FaStar className="icon" />
                               </button>
@@ -74,36 +94,37 @@ function Basket() {
                           <p>{prod.description}</p>
 
                           <div className="buttons">
-                            <button
+                            <Button
+                              variant="outlined"
+                              color="success"
                               onClick={() => {
-                                dispatch(handleBasket(prod)),
-                                  console.log("basket ind", basket);
-                              }}
-                            >
-                              CART
-                            </button>
-                            <button
-                              onClick={() => {
-                                dispatch(handleMinus());
+                                dispatch(handleMinus(prod));
                               }}
                             >
                               -
-                            </button>
-                            <span>{prod.count}</span>
-                            <button
+                            </Button>
+
+                            <span className="count">{prod.count}</span>
+
+                            <Button
+                              variant="outlined"
+                              color="success"
                               onClick={() => {
-                                dispatch(handlePlus());
+                                dispatch(handlePlus(prod));
                               }}
                             >
                               +
-                            </button>
-                            <button
+                            </Button>
+                            <br />
+                            <Button
+                              variant="outlined"
+                              color="error"
                               onClick={() => {
-                                dispatch(handleMinus());
+                                dispatch(handleDelete(prod));
                               }}
                             >
                               delete
-                            </button>
+                            </Button>
                           </div>
                         </div>
                       </div>
@@ -112,6 +133,11 @@ function Basket() {
                 })}
             </Grid>
           </Box>
+        </div>
+      </section>
+      <section className="total">
+        <div className="container">
+          <h1>Total:{total}$</h1>
         </div>
       </section>
     </>

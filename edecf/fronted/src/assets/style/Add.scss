@@ -1,0 +1,32 @@
+.headerr {
+    width: 100%;
+    background-color: rgb(198, 198, 198);
+    // background-color: red;
+    text-align: center;
+    padding-bottom: 100px;
+
+    .container {
+        margin: auto;
+        width: 1200px;
+
+        // background-color: blue;
+        h1 {
+            font-size: 50px;
+        }
+    }
+}
+
+.detail,
+.addProduct {
+    padding-bottom: 100px;
+    width: 100%;
+    background-color: rgb(198, 198, 198);
+
+    .container {
+        width: 1200px;
+        // background-color: rgb(197, 173, 173);
+        margin: auto;
+        text-align: center;
+        padding: 0 100px;
+    }
+}
