@@ -237,12 +237,13 @@
       p {
         width: 40%;
         margin: auto;
+        padding-bottom: 100px;
       }
     }
 
     .firstDetailedPro {
       margin-bottom: 30px;
-      height: 600px;
+      // height: 600px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -314,7 +315,6 @@
 
     .secondDetailedPro {
       margin-bottom: 30px;
-      height: 600px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -491,6 +491,138 @@
               background-color: rgb(107, 107, 107);
               padding: 6px;
               border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .ShopWithUs {
+    .container {
+      width: 100%;
+    }
+  }
+
+  .ourProducts {
+    .container {
+      width: 100%;
+    }
+  }
+
+  .getUpdates {
+    .container {
+      width: 100%;
+    }
+  }
+
+  .featuredProducts {
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      .header {
+        h1 {
+          font-size: 30px;
+        }
+      }
+      .firstDetailedPro {
+        display: flex;
+        // align-items: center;
+        flex-direction: column;
+        // justify-content: center;
+        .imgWrapper {
+          width: 90%;
+          padding: 0;
+          padding-bottom: 40px;
+        }
+        .right {
+          width: 90%;
+          padding: 0;
+          h1 {
+            font-size: 20px !important;
+          }
+          p {
+            width: 100% !important;
+            padding: 0 !important;
+            // color: red;
+          }
+          .pp {
+            // padding-top: 20px;
+            display: block;
+          }
+
+          del {
+            padding-right: 10px;
+            // display: block;
+          }
+        }
+      }
+
+      .secondDetailedPro {
+        display: flex;
+        // align-items: center;
+        flex-direction: column-reverse;
+        // justify-content: center;
+        .imgWrapper {
+          width: 90%;
+          padding: 0;
+          padding-bottom: 40px;
+        }
+        .right {
+          width: 90%;
+          padding: 0;
+          h1 {
+            font-size: 20px !important;
+          }
+          p {
+            width: 100% !important;
+            padding: 0 !important;
+            // color: red;
+          }
+          .pp {
+            // padding-top: 20px;
+            display: block;
+          }
+
+          del {
+            padding-right: 10px;
+            // display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .aboutUs {
+    .container {
+      width: 100%;
+
+      .about {
+        display: flex;
+        flex-direction: column;
+        .right {
+          padding: 0;
+          width: 90%;
+          padding-bottom: 30px;
+        }
+
+        .news {
+          h1 {
+            font-size: 15px;
+          }
+        }
+      }
+
+      .leaderShip {
+        width: 90%;
+        .card {
+          .details {
+            .contacts {
+              width: 100%;
             }
           }
         }

@@ -10,6 +10,7 @@ import { GoHeartFill } from "react-icons/go";
 import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import PositionedMenu from "../components/Menu";
 function Navbar() {
   const basket = useSelector((state) => state.product.basket);
   const wishlist = useSelector((state) => state.product.wishlist);
@@ -61,6 +62,9 @@ function Navbar() {
           </div>
 
           <div className="right">
+            <div className="menu">
+              <PositionedMenu />
+            </div>
             <ul className="pages">
               <li>
                 <Link to="/">Home</Link>
@@ -80,9 +84,9 @@ function Navbar() {
                 </Link>
                 <sup>{wishlist.length}</sup>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/:id">Detail</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

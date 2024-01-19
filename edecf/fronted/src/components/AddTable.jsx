@@ -28,6 +28,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
+
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
@@ -35,20 +36,55 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables() {
+  let refresh = 0;
   const [searchedValue, setSearchedValue] = useState("");
+  // const [searchedData, setSearchedData] = useState("");
+  const [sortedValue, setSortedValue] = useState("");
+  const [filteredValue, setFilteredValue] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const dispatch = useDispatch();
+
+  const [resultData, setResultData] = useState([]);
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   let data = useSelector((state) => state.product.data);
 
-  //   SEARCH START
-  const searchedData = data.filter((elem) =>
-    elem.name.toLowerCase().includes(searchedValue.toLowerCase())
-  );
-    data = [...searchedData];
+  // SEARCH START
+
+  useEffect(() => {
+    setResultData(() => {
+      if (searchedValue) {
+        const copyArr = [...data];
+        const Search = [...copyArr].filter((elem) =>
+          elem.name.toLowerCase().includes(searchedValue.toLowerCase())
+        );
+        return Search;
+      }
+      if (sortedValue == "name") {
+        const copyArr = [...data];
+        console.log("test case!", copyArr);
+        const sortByName = [
+          ...copyArr.sort((a, b) => a.name.localeCompare(b.name)),
+        ];
+
+        console.log("test updated - ", sortByName);
+        return sortByName;
+      }
+      if (sortedValue == "price") {
+        const copyArr = [...data];
+        const sortByPrice = [...copyArr.sort((a, b) => a.price - b.price)];
+        return sortByPrice;
+      }
+    });
+  }, [sortedValue]);
+
+  useEffect(() => {
+    setResultData(data);
+    console.log("DATAA", data);
+  }, [data]);
 
   // SEARCH FINISH
   return (
@@ -78,6 +114,9 @@ export default function CustomizedTables() {
             variant="contained"
             color="success"
             style={{ marginRight: "20px" }}
+            onClick={() => {
+              setFilteredValue("price");
+            }}
           >
             Filter by PRICE
           </Button>
@@ -86,8 +125,7 @@ export default function CustomizedTables() {
             color="success"
             style={{ marginRight: "20px" }}
             onClick={() => {
-              console.log("sorted");
-              data.sort((a, b) => a.name.localeCompare(b.name));
+              setSortedValue("name");
             }}
           >
             Sort by NAME
@@ -97,7 +135,7 @@ export default function CustomizedTables() {
             color="success"
             onClick={() => {
               console.log("sorted");
-              data.sort((a, b) => a.price - b.price);
+              setSortedValue("price");
             }}
           >
             Sort by PRICE
@@ -115,29 +153,35 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
-            <StyledTableRow key={row._id}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">{row.description}</StyledTableCell>
-              <StyledTableCell align="right">
-                <Button
-                  variant="outlined"
-                  color="error"
-                  id={row._id}
-                  onClick={(e) => {
-                    console.log(e.target.id);
-                    dispatch(deleteProduct(e.target.id));
-                  }}
-                >
-                  Delete
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {resultData &&
+            resultData.map((row) => (
+              <StyledTableRow key={row._id}>
+                <StyledTableCell component="th" scope="row">
+                  {row.name}
+                </StyledTableCell>
+                <StyledTableCell align="right">{row.name}</StyledTableCell>
+                <StyledTableCell align="right">{row.price}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {row.description}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    id={row._id}
+                    onClick={(e) => {
+                      console.log(e.target.id);
+                      dispatch(deleteProduct(e.target.id));
+                      console.log("before", refresh);
+                      refresh = 1;
+                      console.log("after", refresh);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </StyledTableCell>
+              </StyledTableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -30,7 +30,6 @@
           margin: auto;
         }
 
-
         .likeStars {
           margin-bottom: 15px;
           margin-top: 5px;
@@ -80,7 +79,6 @@
             cursor: pointer;
           }
 
-
           :nth-child(2) {
             background-color: white;
             color: black;
@@ -111,10 +109,32 @@
 
 .total {
   background-color: rgb(198, 198, 198);
-width: 100%;
-padding: 30px;
-.container {
-  width: 1200px;
-  margin: auto;
+  width: 100%;
+  padding: 30px;
+  .container {
+    width: 1200px;
+    margin: auto;
+  }
 }
+
+@media only screen and (max-width: 1200px) {
+  .headerr {
+    .container {
+      width: 100%!important;
+     
+    }
+  }
+
+  .basket {
+    .container {
+      width: 100%;
+      // padding: 0 30px;
+    }
+  }
+
+  .total {
+    .container {
+      width: 100%;
+    }
+  }
 }

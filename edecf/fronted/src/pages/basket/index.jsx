@@ -135,6 +135,7 @@ function Basket() {
           </Box>
         </div>
       </section>
+      
       <section className="total">
         <div className="container">
           <h1>Total:{total}$</h1>

@@ -1,104 +1,151 @@
 nav {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  position: sticky;
+  z-index: 999;
+  top: 0px;
+
+  .container {
+    margin: auto;
+    width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: white;
-    position: sticky;
 
-    top: 0px;
+    .left {
+      .logo {
+        :first-child {
+          font-size: 30px;
+          font-weight: 900;
+        }
 
-    .container {
-        margin: auto;
-        width: 1200px;
+        :last-child {
+          color: orange;
+          font-size: 50px;
+        }
+      }
+    }
+
+    .right {
+      .menu {
+        display: none;
+        max-width: fit-content;
+      }
+      width: 100%;
+
+      .pages {
+        list-style: none;
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         align-items: center;
 
-        .left {
-            .logo {
-                :first-child {
-                    font-size: 30px;
-                    font-weight: 900;
-                }
+        li {
+          padding-left: 40px;
 
-                :last-child {
-                    color: orange;
-                    font-size: 50px;
-                }
-            }
+          a {
+            text-decoration: none;
+            color: black;
+          }
         }
-
-        .right {
-            width: 100%;
-
-            .pages {
-                list-style: none;
-                display: flex;
-                justify-content: end;
-                align-items: center;
-
-                li {
-                    padding-left: 40px;
-
-                    a {
-                        text-decoration: none;
-                        color: black;
-                    }
-                }
-            }
-        }
+      }
     }
+  }
 }
 
 .contactHeader {
-    width: 100%;
-    background-color: #f8f9fa;
-    padding: 10px;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px;
 
-    .container {
-        width: 1200px;
+  .container {
+    width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+
+    .left {
+      span {
+        padding: 6px;
+        margin-right: 2px;
+        background-color: black;
+        border-radius: 50%;
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      .phoneNumber {
+        margin-right: 10px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        margin: auto;
+        justify-content: start;
 
-        .left {
-            span {
-                padding: 6px;
-                margin-right: 2px;
-                background-color: black;
-                border-radius: 50%;
-            }
+        .phoneNumber {
+          margin-left: 6px;
         }
+      }
 
-        .right {
-            display: flex;
-            align-items: center;
-            justify-content: start;
+      .emailContact {
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
 
-            .phoneNumber {
-                margin-right: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: start;
-
-                .phoneNumber {
-                    margin-left: 6px;
-                }
-            }
-
-            .emailContact {
-                margin-right: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: start;
-
-                .email {
-                    margin-left: 6px;
-                }
-            }
+        .email {
+          margin-left: 6px;
         }
+      }
     }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  nav {
+    .container {
+      width: 100%;
+    }
+  }
+  .contactHeader {
+    .container {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .right {
+    max-width: max-content;
+    .menu {
+      display: block !important;
+    }
+    .pages {
+      display: none !important;
+    }
+  }
+
+  .contactHeader {
+    .container {
+      .right {
+        .phoneNumber {
+          .phoneNumber {
+            display: none;
+          }
+        }
+      }
+
+      .emailContact {
+        .email {
+          display: none;
+        }
+      }
+    }
+  }
 }

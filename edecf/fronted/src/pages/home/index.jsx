@@ -195,7 +195,7 @@ function HomePage() {
                 facere accusamus, possimus.
               </p>
 
-              <span>Price :</span>
+              <span className="pp">Price :</span>
               <p>
                 <del>$269.0</del>
                 <span>$69.00</span>
@@ -271,7 +271,7 @@ function HomePage() {
           <div className="leaderShip">
             <span>TEAM</span>
             <p className="head">Leadership</p>
-            <Grid
+            <Grid className="container"
               container
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
@@ -376,7 +376,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="summerSale">
+      {/* <section className="summerSale">
         <span>SPECIAL PROMO</span>
         <p>Summer Sale</p>
         <p>
@@ -412,7 +412,7 @@ function HomePage() {
           </Grid>
         </Grid>
         <button>SHOP NOW</button>
-      </section>
+      </section> */}
     </>
   );
 }
