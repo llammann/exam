@@ -36,57 +36,26 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables() {
-  let refresh = 0;
   const [searchedValue, setSearchedValue] = useState("");
-  // const [searchedData, setSearchedData] = useState("");
-  const [sortedValue, setSortedValue] = useState("");
-  const [filteredValue, setFilteredValue] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
   const dispatch = useDispatch();
 
   const [resultData, setResultData] = useState([]);
+  let data = useSelector((state) => state.product.data);
 
   useEffect(() => {
     dispatch(getAllProducts());
-  }, [dispatch]);
-
-  let data = useSelector((state) => state.product.data);
-
-  // SEARCH START
+  }, [searchedValue]);
 
   useEffect(() => {
-    setResultData(() => {
-      if (searchedValue) {
-        const copyArr = [...data];
-        const Search = [...copyArr].filter((elem) =>
-          elem.name.toLowerCase().includes(searchedValue.toLowerCase())
-        );
-        return Search;
-      }
-      if (sortedValue == "name") {
-        const copyArr = [...data];
-        console.log("test case!", copyArr);
-        const sortByName = [
-          ...copyArr.sort((a, b) => a.name.localeCompare(b.name)),
-        ];
-
-        console.log("test updated - ", sortByName);
-        return sortByName;
-      }
-      if (sortedValue == "price") {
-        const copyArr = [...data];
-        const sortByPrice = [...copyArr.sort((a, b) => a.price - b.price)];
-        return sortByPrice;
-      }
-    });
-  }, [sortedValue]);
-
-  useEffect(() => {
-    setResultData(data);
-    console.log("DATAA", data);
+    setResultData(
+      searchedValue == " "
+        ? data
+        : [...data].filter((elem) =>
+            elem.name.toLowerCase().includes(searchedValue.toLowerCase())
+          )
+    );
   }, [data]);
 
-  // SEARCH FINISH
   return (
     <TableContainer component={Paper}>
       <div
@@ -115,7 +84,7 @@ export default function CustomizedTables() {
             color="success"
             style={{ marginRight: "20px" }}
             onClick={() => {
-              setFilteredValue("price");
+              console.log("filter");
             }}
           >
             Filter by PRICE
@@ -125,7 +94,9 @@ export default function CustomizedTables() {
             color="success"
             style={{ marginRight: "20px" }}
             onClick={() => {
-              setSortedValue("name");
+              setResultData(
+                [...resultData].sort((a, b) => a.name.localeCompare(b.name))
+              );
             }}
           >
             Sort by NAME
@@ -133,12 +104,24 @@ export default function CustomizedTables() {
           <Button
             variant="contained"
             color="success"
+            style={{ marginRight: "20px" }}
             onClick={() => {
               console.log("sorted");
-              setSortedValue("price");
+              setResultData([...resultData].sort((a, b) => a.price - b.price));
             }}
           >
             Sort by PRICE
+          </Button>
+
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              console.log("sorted");
+              setResultData([...data]);
+            }}
+          >
+            Default
           </Button>
         </div>
       </div>
@@ -172,8 +155,9 @@ export default function CustomizedTables() {
                     onClick={(e) => {
                       console.log(e.target.id);
                       dispatch(deleteProduct(e.target.id));
-                      console.log("before", refresh);
-                      refresh = 1;
+                      setResultData(
+                        resultData.filter((elem) => elem._id != e.target.id)
+                      );
                       console.log("after", refresh);
                     }}
                   >
